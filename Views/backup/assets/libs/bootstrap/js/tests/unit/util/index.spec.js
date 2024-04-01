@@ -58,7 +58,7 @@ describe('Util', () => {
 
     it('should return null if a selector from a href is a url without an anchor', () => {
       fixtureEl.innerHTML = [
-        '<a id="test" data-bs-target="#" href="foo/bar.html"></a>',
+        '<a id="test" data-bs-target="#" href="foo/bar.php"></a>',
         '<div class="target"></div>'
       ].join('')
 

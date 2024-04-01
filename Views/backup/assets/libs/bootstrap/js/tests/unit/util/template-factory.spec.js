@@ -68,7 +68,7 @@ describe('TemplateFactory', () => {
         expect(factory.toHtml().innerHTML).toContain('href="javascript:alert(7)')
       })
 
-      it('should sanitize content only if "config.html" is enabled', () => {
+      it('should sanitize content only if "config.php" is enabled', () => {
         const factory = new TemplateFactory({
           sanitize: true,
           html: false,

@@ -8,7 +8,7 @@
   },
   "settings": {
     "html/html-extensions": [
-      ".html"
+      ".php"
     ]
   },
   "rules": {

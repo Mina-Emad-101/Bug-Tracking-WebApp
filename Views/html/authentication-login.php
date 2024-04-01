@@ -1,10 +1,19 @@
+<?php
+session_start();
+
+if(isset($_SESSION['logged_in'])){ if($_SESSION['logged_in']){ header('location:./main.php'); } }
+if(isset($_SESSION['login_errors'])){
+    $login_errors = $_SESSION['login_errors'];
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bug Tracker</title>
+  <titlee>Bug Tracker<//title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -20,31 +29,28 @@
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <a href="./index.php" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
-                </a>
-                <p class="text-center">Your Social Campaigns</p>
-                <form>
+                <img class="text-nowrap logo-img text-center d-block py-3 w-100" src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                <?php 
+                if(isset($login_errors)){
+                    foreach($login_errors as $error){
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $error;
+                        echo '</div>';
+                    }
+                }
+                ?>
+                <form action="./authenticate.php" method="POST">
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
                   </div>
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                    <div class="form-check">
-                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
-                      <label class="form-check-label text-dark" for="flexCheckChecked">
-                        Remeber this Device
-                      </label>
-                    </div>
-                    <a class="text-primary fw-bold" href="./index.php">Forgot Password ?</a>
-                  </div>
-                  <a href="./index.php" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
+                  <input type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" value="Sign In">
                   <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New to Bug Tracker?</p>
+                    <p class="fs-4 mb-0 fw-bold">New toe>Bug Tracker</</p>
                     <a class="text-primary fw-bold ms-2" href="./authentication-register.php">Create an account</a>
                   </div>
                 </form>

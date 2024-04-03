@@ -1,12 +1,18 @@
 <?php
-    require __DIR__.'/../../dbAccess.php';
-    header('location:./authentication-login.php');
+    require_once __DIR__.'/../../Controllers/dbController.php';
+    require_once __DIR__.'/../../Controllers/authController.php';
 
     session_start();
+
+    header('location:./authentication-login.php');
+
+    $db = new DbController();
+    $auth = new AuthController($db);
+
     $_SESSION['login_errors'] = array();
 
-    $email = strtolower(mysqli_real_escape_string($conn, $_POST['email']));
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $email = strtolower(mysqli_real_escape_string($db->conn, $_POST['email']));
+    $password = mysqli_real_escape_string($db->conn, $_POST['password']);
 
     if(!$email){ array_push($_SESSION['login_errors'], 'Email is Required'); }
 
@@ -14,23 +20,6 @@
 
     if(count($_SESSION['login_errors']) > 0){ exit(); }
 
-    $query = "SELECT * FROM auth WHERE email = '$email' AND password = '$password';";
-    $result = mysqli_query($conn, $query);
-
-    if(mysqli_num_rows($result) == 0){ array_push($_SESSION['login_errors'], 'Incorrect Email or Password'); }
-
-    if(count($_SESSION['login_errors']) == 0){
-        $_SESSION['logged_in'] = true;
-
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['email'] = $row['email'];
-
-        $role_id = $row['role'];
-        $query = "SELECT * FROM roles WHERE id = '$role_id';";
-        $result = mysqli_query($conn, $query);
-        $row = mysqli_fetch_assoc($result);
-
-        $_SESSION['role'] = $row['role'];
-    }
+    if(!$auth->confirmLogin($email, $password)){ array_push($_SESSION['login_errors'], 'Incorrect Email or Password'); }
+    else{ $_SESSION['main'] = "location:http://".$_SERVER['SERVER_NAME'].'/BugTrackingApplication/Views/html/main.php'; }
 ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['logged_in'])){ if($_SESSION['logged_in']){ header('location:./main.php'); } }
+if(isset($_SESSION['loggedInUser'])){ header($_SESSION['main']); exit(); }
 if(isset($_SESSION['login_errors'])){
     $login_errors = $_SESSION['login_errors'];
 }
@@ -13,7 +13,7 @@ if(isset($_SESSION['login_errors'])){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <titlee>Bug Tracker<//title>
+  <title>Bug Tracker</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -50,7 +50,7 @@ if(isset($_SESSION['login_errors'])){
                   </div>
                   <input type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" value="Sign In">
                   <div class="d-flex align-items-center justify-content-center">
-                    <p class="fs-4 mb-0 fw-bold">New toe>Bug Tracker</</p>
+                    <p class="fs-4 mb-0 fw-bold">New to Bug Tracker</p>
                     <a class="text-primary fw-bold ms-2" href="./authentication-register.php">Create an account</a>
                   </div>
                 </form>

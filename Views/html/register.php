@@ -1,33 +1,35 @@
 <?php
-require __DIR__.'/../../dbAccess.php';
-header('location:./authentication-register.php');
+    require_once __DIR__.'/../../Controllers/dbController.php';
+    require_once __DIR__.'/../../Controllers/authController.php';
 
-session_start();
-$_SESSION['register_errors'] = array();
+    session_start();
 
-$username = mysqli_real_escape_string($conn, $_POST['username']);
-$email = strtolower(mysqli_real_escape_string($conn, $_POST['email']));
-$password = mysqli_real_escape_string($conn, $_POST['password']);
-$role = $_POST['role'];
+    header('location:./authentication-login.php');
 
-if(!$username){ array_push($_SESSION['register_errors'], 'Username is Required'); }
-if(!$email){ array_push($_SESSION['register_errors'], 'Email is Required'); }
-if(!$password){ array_push($_SESSION['register_errors'], 'Password is Required'); }
+    $db = new DbController();
+    $auth = new AuthController($db);
 
-if(count($_SESSION['register_errors']) > 0){ exit(); }
+    $_SESSION['register_errors'] = array();
 
-$query = "SELECT * FROM auth WHERE username = '$username';";
-$result = mysqli_query($conn, $query);
-if(mysqli_num_rows($result) > 0){ array_push($_SESSION['register_errors'], 'Username Already Taken'); }
+    $username = mysqli_real_escape_string($db->conn, $_POST['username']);
+    $email = strtolower(mysqli_real_escape_string($db->conn, $_POST['email']));
+    $password = mysqli_real_escape_string($db->conn, $_POST['password']);
+    $role = 'Customer';
 
-$query = "SELECT * FROM auth WHERE email = '$email';";
-$result = mysqli_query($conn, $query);
-if(mysqli_num_rows($result) > 0){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
+    if(!$username){ array_push($_SESSION['register_errors'], 'Username is Required'); }
+    if(!$email){ array_push($_SESSION['register_errors'], 'Email is Required'); }
+    if(!$password){ array_push($_SESSION['register_errors'], 'Password is Required'); }
 
-if(count($_SESSION['register_errors']) == 0){
-    $_SESSION['logged_in'] = true;
-    $query = "INSERT INTO auth (username, email, password, role_id) VALUES ('$username', '$email', '$password', 3);";
-    mysqli_query($conn, $query);
-    header('location:./main.php');
-}
+    if(count($_SESSION['register_errors']) > 0){ exit(); }
+
+    if($auth->isUsernameTaken($username)){ array_push($_SESSION['register_errors'], 'Username Already Taken'); }
+
+    if($auth->isEmailTaken($email)){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
+
+    if(count($_SESSION['register_errors']) == 0){
+        $auth->register($username, $email, $password, $role);
+        $auth->confirmLogin($email, $password);
+        $_SESSION['main'] = "location:http://".$_SERVER['SERVER_NAME'].'/BugTrackingApplication/Views/html/main.php';
+        header($_SESSION['main']);
+    }
 ?>

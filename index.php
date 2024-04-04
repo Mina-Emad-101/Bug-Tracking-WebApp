@@ -7,7 +7,7 @@
 	}
 	else
 	{
-		$main = 'location:./Views/html/authentication-login.php';
+		$main = 'location:./Views/html/auth/authentication-login.php';
 	}
 	
 	header($main);

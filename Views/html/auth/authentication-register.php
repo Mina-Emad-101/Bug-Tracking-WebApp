@@ -28,15 +28,15 @@ if(isset($_SESSION['register_errors'])){
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <img class="text-nowrap logo-img text-center d-block py-3 w-100" src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                <img class="text-nowrap logo-img text-center d-block py-3 w-100" src="../assets/images/logos/dark-logo.svg" width="180" alt=""/>
                 <?php 
-                if(isset($register_errors)){
-                    foreach($register_errors as $error){
-                        echo '<div class="alert alert-danger" role="alert">';
-                        echo $error;
-                        echo '</div>';
+                    if(isset($register_errors)){
+                        foreach($register_errors as $error){
+                            echo '<div class="alert alert-danger" role="alert">';
+                            echo $error;
+                            echo '</div>';
+                        }
                     }
-                }
                 ?>
                 <form action="./register.php" method="POST">
                   <div class="mb-3">

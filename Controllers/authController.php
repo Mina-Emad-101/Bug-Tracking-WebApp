@@ -1,17 +1,10 @@
 <?php
 
+    require_once __DIR__.'/../Controllers/dbController.php';
     require_once __DIR__.'/../Models/user.php';
-    session_start();
 
     class AuthController
     {
-        private $db;
-
-        public function __construct($dbController)
-        {
-            $this->db = $dbController;
-        }
-
         public static function getRoleID($role)
         {
             if($role == 'Admin') return 1;
@@ -26,37 +19,42 @@
             if($id == 3) return 'Customer';
         }
 
-        public function confirmLogin($email, $password)
+        public static function confirmLogin($email, $password)
         {
             $query = "SELECT * FROM auth WHERE email = '$email' AND password = '$password';";
-            $result = $this->db->conn->query($query);
+            $result = DbController::query($query);
+
             if(mysqli_num_rows($result) == 0) return false;
 
+            session_start();
             $row = $result->fetch_assoc();
             $_SESSION['loggedInUser'] = new User($row);
 
             return true;
         }
 
-        public function isUsernameTaken($username)
+        public static function isUsernameTaken($username)
         {
             $query = "SELECT * FROM auth WHERE username = '$username';";
-            $result = $this->db->conn->query($query);
+            $result = DbController::query($query);
+
             if(mysqli_num_rows($result) == 0){ return false; } else { return true; }
         }
 
-        public function isEmailTaken($email)
+        public static function isEmailTaken($email)
         {
             $query = "SELECT * FROM auth WHERE email = '$email';";
-            $result = $this->db->conn->query($query);
+            $result = DbController::query($query);
+
             if(mysqli_num_rows($result) == 0){ return false; } else { return true; }
         }
 
-        public function register($username, $email, $password, $role)
+        public static function register($username, $email, $password, $role)
         {
-            $role_id = self::getRoleID($role);
-            $query = "INSERT INTO auth (username, email, password, role_id) VALUES ('$username', '$email', '$password', '$role_id');";
-            $this->db->conn->query($query);
+            $roleID = self::getRoleID($role);
+
+            $query = "INSERT INTO auth (username, email, password, role_id) VALUES ('$username', '$email', '$password', '$roleID');";
+            DbController::query($query);
         }
     }
 

@@ -14,8 +14,8 @@ if(isset($_SESSION['login_errors'])){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bug Tracker</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="../../assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="../../assets/css/styles.min.css" />
 </head>
 
 <body>
@@ -29,7 +29,7 @@ if(isset($_SESSION['login_errors'])){
           <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
               <div class="card-body">
-                <img class="text-nowrap logo-img text-center d-block py-3 w-100" src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                <img class="text-nowrap logo-img text-center d-block py-3 w-100" src="../../assets/images/logos/dark-logo.svg" width="180" alt="">
                 <?php 
                 if(isset($login_errors)){
                     foreach($login_errors as $error){
@@ -61,8 +61,8 @@ if(isset($_SESSION['login_errors'])){
       </div>
     </div>
   </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

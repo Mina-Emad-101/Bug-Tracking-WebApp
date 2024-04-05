@@ -1,28 +1,23 @@
 <?php
     class DbController
     {
-        private $host = 'localhost';
-        private $user = 'root';
-        private $password = '';
-        private $dbName = 'MyDB';
-        public $conn;
+        private static $host = 'localhost';
+        private static $user = 'root';
+        private static $password = '';
+        private static $dbName = 'MyDB';
 
-        public function __construct()
+        public static function openConnection()
         {
-            $this->openConnection();
+            return new mysqli(self::$host, self::$user, self::$password, self::$dbName);
         }
 
-        public function openConnection()
+        public static function query($query)
         {
-            $this->conn = new mysqli($this->host, $this->user, $this->password, $this->dbName);
-        }
-
-        public function closeConnection()
-        {
-            if($this->conn)
-            {
-                $this->conn->close();
-            }
+            $conn = self::openConnection();
+            $result = $conn->query($query);
+            $conn->close();           
+            
+            return $result;
         }
     }
 ?>

@@ -9,7 +9,7 @@ class User
     private $email;
     private $role;
 
-    function __construct($dbRow)
+    public function __construct($dbRow)
     {
         $this->id = $dbRow['id'];
         $this->username = $dbRow['username'];

@@ -1,3 +1,16 @@
+<?php
+require_once __DIR__.'/../../../Controllers/projectsController.php';
+require_once __DIR__.'/../../../Controllers/categoriesController.php';
+require_once __DIR__.'/../../../Models/project.php';
+
+if(isset($_POST['projectToRemove']))
+{
+    ProjectsController::deleteProject($_POST['projectToRemove']);
+}
+
+$projects = ProjectsController::getProjectsArray();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -27,79 +40,42 @@
         </div>
         <br>
         <div class="row">
-          <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-              <div class="card-body pt-3 p-4">
-                <br>
-                <h4 class="fs-8 fw-semibold w-100 text-center">Parazon</h4>
-                <br>
-                <h4 class="fs-6 fw-semibold w-100 text-center">E-Commerce</h4>
-                <div class="d-flex align-items-center justify-content-center">
-                  <a href="" class="btn btn-dark w-100 m-1">See Details</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-              <div class="position-relative">
-                <a href="javascript:void(0)"><img src="../assets/images/products/s5.jpg" class="card-img-top rounded-0" alt="..."></a>
-                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-              <div class="card-body pt-3 p-4">
-                <h6 class="fw-semibold fs-4">MacBook Air Pro</h6>
-                <div class="d-flex align-items-center justify-content-between">
-                  <h6 class="fw-semibold fs-4 mb-0">$650 <span class="ms-2 fw-normal text-muted fs-3"><del>$900</del></span></h6>
-                  <ul class="list-unstyled d-flex align-items-center mb-0">
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-              <div class="position-relative">
-                <a href="javascript:void(0)"><img src="../assets/images/products/s7.jpg" class="card-img-top rounded-0" alt="..."></a>
-                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-              <div class="card-body pt-3 p-4">
-                <h6 class="fw-semibold fs-4">Red Valvet Dress</h6>
-                <div class="d-flex align-items-center justify-content-between">
-                  <h6 class="fw-semibold fs-4 mb-0">$150 <span class="ms-2 fw-normal text-muted fs-3"><del>$200</del></span></h6>
-                  <ul class="list-unstyled d-flex align-items-center mb-0">
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xl-3">
-            <div class="card overflow-hidden rounded-2">
-              <div class="position-relative">
-                <a href="javascript:void(0)"><img src="../assets/images/products/s11.jpg" class="card-img-top rounded-0" alt="..."></a>
-                <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex position-absolute bottom-0 end-0 mb-n3 me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add To Cart"><i class="ti ti-basket fs-4"></i></a>                      </div>
-              <div class="card-body pt-3 p-4">
-                <h6 class="fw-semibold fs-4">Cute Soft Teddybear</h6>
-                <div class="d-flex align-items-center justify-content-between">
-                  <h6 class="fw-semibold fs-4 mb-0">$285 <span class="ms-2 fw-normal text-muted fs-3"><del>$345</del></span></h6>
-                  <ul class="list-unstyled d-flex align-items-center mb-0">
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="me-1" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                    <li><a class="" href="javascript:void(0)"><i class="ti ti-star text-warning"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php
+            for($i = 0; $i < count($projects); $i++)
+            {
+              echo '
+                  <div class="col-sm-6 col-xl-3">
+                    <div class="card overflow-hidden rounded-2">
+                      <div class="card-body pt-3 p-4">
+                        <br>
+                        <h4 class="fs-8 fw-semibold w-100 text-center">'.$projects[$i]->getName().'</h4>
+                        <br>
+                        <h4 class="fs-6 fw-semibold w-100 text-center">'.CategoriesController::getCategoryFromID($projects[$i]->getCategoryID()).'</h4>
+                        <div class="d-flex align-items-center justify-content-center w-100">
+                          <form action="" method="POST" class="w-100">
+                            <input type="hidden" name="projectName" value="'.$projects[$i]->getName().'">
+                            <button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
+                          </form>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center w-100">
+                          <form action="" method="POST" class="w-100">
+                            <input type="hidden" name="projectToRemove" value="'.$projects[$i]->getName().'">
+                            <button type="submit" class="btn btn-outline-danger w-100 m-1 fs-5">Delete Project</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              ';
+              if($i + 1 % 4 == 0)
+              {
+                echo '
+                    </div>
+                    <div class="row">
+                ';
+              }
+            }
+          ?>
         </div>
       </div>
     </div>

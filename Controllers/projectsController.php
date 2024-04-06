@@ -2,6 +2,7 @@
 
     require_once __DIR__.'/../Controllers/dbController.php';
     require_once __DIR__.'/../Controllers/categoriesController.php';
+    require_once __DIR__.'/../Models/project.php';
 
     class ProjectsController
     {
@@ -42,6 +43,27 @@
             $categoryID = CategoriesController::getCategoryID($category);
             $query = "INSERT INTO projects (name, category_id) VALUES ('$name', '$categoryID');";
             DbController::query($query);
+        }
+
+        public static function deleteProject($name)
+        {
+            $query = "DELETE FROM projects WHERE name = '$name';";
+            DbController::query($query);
+        }
+
+        public static function getProjectsArray()
+        {
+            $projects = array();
+
+            $query = 'SELECT * FROM projects';
+            $result = DbController::query($query);
+            while($row = $result->fetch_assoc())
+            {
+                $project = new Project($row);
+                array_push($projects, $project);
+            }
+
+            return $projects;
         }
     }
 

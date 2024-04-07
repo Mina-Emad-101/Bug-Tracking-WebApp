@@ -1,40 +1,40 @@
 <?php
-    require_once __DIR__.'/../../../Controllers/dbController.php';
-    require_once __DIR__.'/../../../Controllers/authController.php';
+require_once __DIR__.'/../../../Controllers/dbController.php';
+require_once __DIR__.'/../../../Controllers/authController.php';
 
-    session_start();
+session_start();
 
-    header('location:'.$_SERVER['HTTP_REFERER']);
+header('location:'.$_SERVER['HTTP_REFERER']);
 
-    $_SESSION['register_errors'] = array();
+$_SESSION['register_errors'] = array();
 
-    $conn = DbController::openConnection();
+$conn = DbController::openConnection();
 
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = strtolower(mysqli_real_escape_string($conn, $_POST['email']));
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+$username = mysqli_real_escape_string($conn, $_POST['username']);
+$email = strtolower(mysqli_real_escape_string($conn, $_POST['email']));
+$password = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $conn->close();
+$conn->close();
 
-    if(isset($_POST['role'])) $role = $_POST['role'];
-    else $role = 'Customer';
+if(isset($_POST['role'])) $role = $_POST['role'];
+else $role = 'Customer';
 
-    if(!$username){ array_push($_SESSION['register_errors'], 'Username is Required'); }
-    if(!$email){ array_push($_SESSION['register_errors'], 'Email is Required'); }
-    if(!$password){ array_push($_SESSION['register_errors'], 'Password is Required'); }
+if(!$username){ array_push($_SESSION['register_errors'], 'Username is Required'); }
+if(!$email){ array_push($_SESSION['register_errors'], 'Email is Required'); }
+if(!$password){ array_push($_SESSION['register_errors'], 'Password is Required'); }
 
-    if(count($_SESSION['register_errors']) > 0) exit();
+if(count($_SESSION['register_errors']) > 0) exit();
 
-    if(AuthController::isUsernameTaken($username)){ array_push($_SESSION['register_errors'], 'Username Already Taken'); }
+if(AuthController::isUsernameTaken($username)){ array_push($_SESSION['register_errors'], 'Username Already Taken'); }
 
-    if(AuthController::isEmailTaken($email)){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
+if(AuthController::isEmailTaken($email)){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
 
-    if(count($_SESSION['register_errors']) == 0){
-        AuthController::register($username, $email, $password, $role);
-        $_SESSION['register_success'] = true;
-        if(isset($_SESSION['loggedInUser'])) exit();
+if(count($_SESSION['register_errors']) == 0){
+	AuthController::register($username, $email, $password, $role);
+	$_SESSION['register_success'] = true;
+	if(isset($_SESSION['loggedInUser'])) exit();
 
-        AuthController::confirmLogin($email, $password);
-        header("location:http://".$_SERVER['SERVER_NAME'].'/BugTrackingApplication/Views/html/main.php');
-    }
+	AuthController::confirmLogin($email, $password);
+	header("location:http://".$_SERVER['SERVER_NAME'].'/BugTrackingApplication/Views/html/main.php');
+}
 ?>

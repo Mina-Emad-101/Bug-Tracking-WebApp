@@ -30,8 +30,8 @@ if(AuthController::isUsernameTaken($username)){ array_push($_SESSION['register_e
 if(AuthController::isEmailTaken($email)){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
 
 if(count($_SESSION['register_errors']) == 0){
-	AuthController::register($username, $email, $password, $role);
 	$_SESSION['register_success'] = true;
+	AuthController::register($username, $email, $password, $role);
 	if(isset($_SESSION['loggedInUser'])) exit();
 
 	AuthController::confirmLogin($email, $password);

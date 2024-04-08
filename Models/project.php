@@ -12,7 +12,7 @@ class Project
 		$this->categoryID = $dbRow['category_id'];
 	}
 
-	public function getId()
+	public function getID()
 	{
 		return $this->id;
 	}
@@ -27,4 +27,3 @@ class Project
 		return $this->categoryID;
 	}
 }
-?>

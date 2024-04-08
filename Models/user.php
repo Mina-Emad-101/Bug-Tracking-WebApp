@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../Controllers/authController.php';
+require_once __DIR__ . '/../Controllers/authController.php';
 
 class User
 {
@@ -17,7 +17,7 @@ class User
 		$this->role = AuthController::getRoleFromID($dbRow['role_id']);
 	}
 
-	public function getId()
+	public function getID()
 	{
 		return $this->id;
 	}
@@ -37,5 +37,3 @@ class User
 		return $this->role;
 	}
 }
-
-?>

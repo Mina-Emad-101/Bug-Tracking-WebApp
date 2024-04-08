@@ -1,22 +1,24 @@
 <?php
 
-require_once __DIR__.'/../Controllers/dbController.php';
-require_once __DIR__.'/../Models/user.php';
+require_once __DIR__ . '/../Controllers/dbController.php';
+require_once __DIR__ . '/../Models/user.php';
 
 class AuthController
 {
-	public static function getRoleID($role)
+	public static function getRoleID($roleName)
 	{
-		if($role == 'Admin') return 1;
-		if($role == 'Staff') return 2;
-		if($role == 'Customer') return 3;
+		$query = "SELECT * FROM roles WHERE role = '$roleName';";
+		$result = DbController::query($query);
+		$row = $result->fetch_assoc();
+		return $row['id'];
 	}
 
 	public static function getRoleFromID($id)
 	{
-		if($id == 1) return 'Admin';
-		if($id == 2) return 'Staff';
-		if($id == 3) return 'Customer';
+		$query = "SELECT * FROM roles WHERE id = '$id';";
+		$result = DbController::query($query);
+		$row = $result->fetch_assoc();
+		return $row['role'];
 	}
 
 	public static function confirmLogin($email, $password)
@@ -24,7 +26,7 @@ class AuthController
 		$query = "SELECT * FROM auth WHERE email = '$email' AND password = '$password';";
 		$result = DbController::query($query);
 
-		if(mysqli_num_rows($result) == 0) return false;
+		if (mysqli_num_rows($result) == 0) return false;
 
 		session_start();
 		$row = $result->fetch_assoc();
@@ -38,7 +40,11 @@ class AuthController
 		$query = "SELECT * FROM auth WHERE username = '$username';";
 		$result = DbController::query($query);
 
-		if(mysqli_num_rows($result) == 0){ return false; } else { return true; }
+		if (mysqli_num_rows($result) == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public static function isEmailTaken($email)
@@ -46,7 +52,11 @@ class AuthController
 		$query = "SELECT * FROM auth WHERE email = '$email';";
 		$result = DbController::query($query);
 
-		if(mysqli_num_rows($result) == 0){ return false; } else { return true; }
+		if (mysqli_num_rows($result) == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public static function register($username, $email, $password, $role)
@@ -57,6 +67,29 @@ class AuthController
 		DbController::query($query);
 	}
 
-}
+	public static function deleteAccount($id)
+	{
+		$query = "DELETE FROM auth WHERE id = '$id';";
+		DbController::query($query);
+	}
 
-?>
+	public static function getUsersArray($roleID = 0)
+	{
+		$users = array();
+
+		if ($roleID > 0) {
+			$query = "SELECT * FROM auth WHERE role_id = $roleID;";
+			$result = DbController::query($query);
+		} else {
+			$query = 'SELECT * FROM auth;';
+			$result = DbController::query($query);
+		}
+
+		while ($row = $result->fetch_assoc()) {
+			$user = new User($row);
+			array_push($users, $user);
+		}
+
+		return $users;
+	}
+}

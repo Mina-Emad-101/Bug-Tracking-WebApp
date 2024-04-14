@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__.'/../../../Controllers/adminPermissions.php';
+?>
 <!doctype html>
 <html lang="en">
 

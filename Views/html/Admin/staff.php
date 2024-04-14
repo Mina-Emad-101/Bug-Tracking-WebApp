@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../../../Controllers/adminPermissions.php';
 require_once __DIR__ . '/../../../Controllers/authController.php';
 require_once __DIR__ . '/../../../Models/user.php';
 

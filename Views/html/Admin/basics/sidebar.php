@@ -32,6 +32,14 @@
 						<span class="hide-menu">Projects</span>
 					</a>
 				</li>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="./bugs.php" aria-expanded="false">
+						<span>
+							<i class="ti ti-bug"></i>
+						</span>
+						<span class="hide-menu">Bugs</span>
+					</a>
+				</li>
 				<li class="nav-small-cap">
 					<i class="ti ti-dots nav-small-cap-icon fs-4"></i>
 					<span class="hide-menu">UI COMPONENTS</span>

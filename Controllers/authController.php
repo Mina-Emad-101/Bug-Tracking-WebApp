@@ -5,6 +5,14 @@ require_once __DIR__ . '/../Models/user.php';
 
 class AuthController
 {
+	public static function getUsernameFromID($id)
+	{
+		$query = "SELECT * FROM auth WHERE id = '$id';";
+		$result = DbController::query($query);
+		$row = $result->fetch_assoc();
+		return $row['username'];
+	}
+
 	public static function getRoleID($roleName)
 	{
 		$query = "SELECT * FROM roles WHERE role = '$roleName';";

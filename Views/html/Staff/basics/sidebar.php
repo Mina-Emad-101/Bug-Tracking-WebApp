@@ -19,9 +19,9 @@
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="./bugs.php" aria-expanded="false">
 						<span>
-							<i class="ti ti-user"></i>
+							<i class="ti ti-bug"></i>
 						</span>
-						<span class="hide-menu">Bugs</span>
+						<span class="hide-menu">My Bugs</span>
 					</a>
 				</li>
 				<li class="nav-small-cap">

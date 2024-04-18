@@ -16,17 +16,14 @@ class BugsController
 		DbController::query($query);
 	}
 
-	public static function getBugsArray($reporterID = '')
+	public static function getBugsArray(string $orderBy, $reporterID = '', $ascending = true)
 	{
-		$reporter = '';
-		if($reporterID)
-		{
-			$reporter = " WHERE reporter_id = $reporterID";
-		}
+		$reporter = ($reporterID)? " WHERE reporter_id = $reporterID":"";
+		$order = ($ascending)? 'ASC':'DESC';
 
 		$bugs = array();
 
-		$query = 'SELECT * FROM bugs'.$reporter.' ORDER BY status_id ASC;';
+		$query = 'SELECT * FROM bugs'.$reporter.' ORDER BY '.$orderBy.' '.$order.';';
 		$result = DbController::query($query);
 		while($row = $result->fetch_assoc())
 		{

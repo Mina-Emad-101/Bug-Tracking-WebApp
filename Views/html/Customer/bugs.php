@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../Models/user.php';
 if(isset($_POST['bugIDToRemove']))
 	BugsController::deleteBug($_POST['bugIDToRemove']);
 
-$bugs = BugsController::getBugsArray($_SESSION['loggedInUser']->getID());
+$bugs = BugsController::getBugsArray('status_id', $_SESSION['loggedInUser']->getID());
 ?>
 
 <!doctype html>

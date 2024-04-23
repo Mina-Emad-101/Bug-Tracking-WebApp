@@ -2,11 +2,14 @@
 require_once __DIR__.'/../../../Controllers/customerPermissions.php';
 require_once __DIR__.'/../../../Controllers/bugsController.php';
 require_once __DIR__.'/../../../Controllers/projectsController.php';
+require_once __DIR__.'/../../../Controllers/messagesController.php';
 require_once __DIR__.'/../../../Controllers/dbController.php';
 require_once __DIR__.'/../../../Models/bug.php';
 require_once __DIR__.'/../../../Models/user.php';
+require_once __DIR__.'/../../../Models/message.php';
 
 $bug = BugsController::getBug($_POST['bugID']);
+$messages = MessagesController::getMessagesArray($bug->getAssignedStaff()->getID(), $bug->getReporter()->getID())
 ?>
 <!doctype html>
 <html lang="en">
@@ -82,6 +85,20 @@ $bug = BugsController::getBug($_POST['bugID']);
 							<h3 class="fw-semibold">Bug Reporter:</h3>
 							<h4>ID: <?php echo $bug->getReporterID(); ?></h4>
 							<h4>Username: <?php echo $bug->getReporter()->getUsername(); ?></h4>
+							<br>
+							<h3 class="fw-semibold">Messages:</h3>
+							<h4>ID: <?php echo $bug->getReporterID(); ?></h4>
+							<h4>Username: <?php echo $bug->getReporter()->getUsername(); ?></h4>
+							<?php
+							for($i = 0; $i < count($messages); $i++)
+							{
+							echo '
+							<h4>From: ' . $messages[$i]->getSender()->getUsername() . ' (' . $messages[$i]->getSender()->getRole() . ')</h4>
+							<h4>' . $messages[$i]->getMessage() . '</h4>
+							<br>
+							';
+							}
+							?>
 							<br>
 						</div>
 					</div>

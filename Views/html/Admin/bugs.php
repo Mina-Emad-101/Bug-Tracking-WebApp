@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../Controllers/authController.php';
 require_once __DIR__ . '/../../../Controllers/bugsController.php';
 require_once __DIR__ . '/../../../Models/bug.php';
 
-$bugs = BugsController::getBugsArray('status_id');
+$bugs = BugsController::getBugsArray('priority_id');
 ?>
 
 <!doctype html>

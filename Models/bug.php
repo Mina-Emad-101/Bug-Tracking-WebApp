@@ -69,11 +69,11 @@ class Bug
 
 	public function getPriorityColor()
 	{
-		if($this->priorityID == 3)
+		if($this->priorityID == 1)
 			return '#ff6361';
 		if($this->priorityID == 2)
 			return '#494ca2';
-		if($this->priorityID == 1)
+		if($this->priorityID == 3)
 			return '#6f975c';
 		return '#000000';
 	}

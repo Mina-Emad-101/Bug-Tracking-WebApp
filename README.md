@@ -28,7 +28,7 @@
 #### Administrator
 <ul>
 	<li>Log into the App</li>
-	<li>Add Staff Members to App</li>
+	<li>Add Administrators and Staff Members Accounts to App</li>
 	<li>Add Projects to App</li>
 	<li>View Bugs sent from Customers</li>
 	<li>Assign Bugs to Staff Members</li>

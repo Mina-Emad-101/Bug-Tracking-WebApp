@@ -1,12 +1,10 @@
 # Bug-Tracking-WebApp
 
-<br>
 
-#### This Bug Tracking Web Application manages Bugs for different Projects.
-#### Front-End: Html, Css, Javascript (Css and Javascript From Bootstrap Template)
-#### Back-End: PHP, MySQL
+### This Bug Tracking Web Application manages Bugs for different Projects.
+### Front-End: Html, Css, Javascript (Css and Javascript From Bootstrap Template)
+### Back-End: PHP, MySQL
 
-<br>
 <br>
 
 ## App Explanation:

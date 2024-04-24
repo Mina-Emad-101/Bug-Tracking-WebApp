@@ -35,31 +35,69 @@ $bugs = BugsController::getBugsArray(orderBy: 'priority_id', assignedStaffID: $_
 				<div class="row">
 					<?php
 					for ($i = 0; $i < count($bugs); $i++) {
-						echo '
-						<div class="col-sm-6 col-xl-3">
-							<div class="card overflow-hidden rounded-2">
-								<div class="card-body pt-3 p-4">
-									<br>
-									<h1 class="fw-semibold w-100 text-center">Bug #' . $bugs[$i]->getID() . '</h1>
-									<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Priority: ' . $bugs[$i]->getPriority() . '</h3>
-									<br>
-									<h4 class="fw-semibold w-100 text-center">Status: ' . $bugs[$i]->getStatus() . '</h4>
-									<h4 class="fw-semibold w-100 text-center">Project: ' . ProjectsController::getProjectFromID($bugs[$i]->getProjectID()) . '</h4>
-										<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="bug-page.php" method="GET" class="w-100">
-											<input type="hidden" name="bugID" value="' . $bugs[$i]->getID() . '">
-											<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
-										</form>
+						if($bugs[$i]->getStatus() == 'Investigating')
+						{
+							echo '
+							<div class="col-sm-6 col-xl-3">
+								<div class="card overflow-hidden rounded-2">
+									<div class="card-body pt-3 p-4">
+										<br>
+										<h1 class="fw-semibold w-100 text-center">Bug #' . $bugs[$i]->getID() . '</h1>
+										<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Priority: ' . $bugs[$i]->getPriority() . '</h3>
+										<br>
+										<h4 class="fw-semibold w-100 text-center">Status: ' . $bugs[$i]->getStatus() . '</h4>
+										<h4 class="fw-semibold w-100 text-center">Project: ' . ProjectsController::getProjectFromID($bugs[$i]->getProjectID()) . '</h4>
+											<div class="d-flex align-items-center justify-content-center w-100">
+											<form action="bug-page.php" method="GET" class="w-100">
+												<input type="hidden" name="bugID" value="' . $bugs[$i]->getID() . '">
+												<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-							';
-						if ($i + 1 % 4 == 0) {
-							echo '
-								</div>
-								<div class="row">
 								';
+							if ($i + 1 % 4 == 0) {
+								echo '
+									</div>
+									<div class="row">
+									';
+							}
+						}
+					}
+					echo '
+						</div>
+						<div class="row">
+						';
+					for ($i = 0; $i < count($bugs); $i++) {
+						if($bugs[$i]->getStatus() == 'Fixed')
+						{
+							echo '
+							<div class="col-sm-6 col-xl-3">
+								<div class="card overflow-hidden rounded-2">
+									<div class="card-body pt-3 p-4">
+										<br>
+										<h1 class="fw-semibold w-100 text-center">Bug #' . $bugs[$i]->getID() . '</h1>
+										<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Priority: ' . $bugs[$i]->getPriority() . '</h3>
+										<br>
+										<h4 class="fw-semibold w-100 text-center">Status: ' . $bugs[$i]->getStatus() . '</h4>
+										<h4 class="fw-semibold w-100 text-center">Project: ' . ProjectsController::getProjectFromID($bugs[$i]->getProjectID()) . '</h4>
+											<div class="d-flex align-items-center justify-content-center w-100">
+											<form action="bug-page.php" method="GET" class="w-100">
+												<input type="hidden" name="bugID" value="' . $bugs[$i]->getID() . '">
+												<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+								';
+							if ($i + 1 % 4 == 0) {
+								echo '
+									</div>
+									<div class="row">
+									';
+							}
 						}
 					}
 					?>

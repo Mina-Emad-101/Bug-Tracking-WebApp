@@ -137,7 +137,7 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 								<button type="submit" class="btn btn-primary fw-semibold fs-4">Send Message</button>
 							</form>
 							<br>
-							<h3 class="fw-semibold">Assign Bug:</h3>
+							<h3 class="fw-semibold">Assign bug to another Staff member:</h3>
 							<form action="./form-handling/assign-bug.php" method="POST">
 								<input type="hidden" name="bugID" value="<?php echo $bug->getID(); ?>">
 								<div class="mb-3">

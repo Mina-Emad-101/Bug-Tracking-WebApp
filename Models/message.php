@@ -9,10 +9,10 @@ class Message
 	private $id;
 	private $message;
 	private $senderID;
-	private $recieverID;
+	private $receiverID;
 	private $bugID;
 	private $sender;
-	private $reciever;
+	private $receiver;
 	private $bug;
 
 	public function __construct($dbRow)
@@ -20,16 +20,16 @@ class Message
 		$this->id = $dbRow['id'];
 		$this->message = $dbRow['message'];
 		$this->senderID = $dbRow['sender_id'];
-		$this->recieverID = $dbRow['reciever_id'];
+		$this->receiverID = $dbRow['receiver_id'];
 		$this->bugID = $dbRow['bug_id'];
 
 		$query = 'SELECT * FROM auth WHERE id = ' . $this->senderID . ';';
 		$result = DbController::query($query);
 		$this->sender = new User($result->fetch_assoc());
 
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->recieverID . ';';
+		$query = 'SELECT * FROM auth WHERE id = ' . $this->receiverID . ';';
 		$result = DbController::query($query);
-		$this->reciever = new User($result->fetch_assoc());
+		$this->receiver = new User($result->fetch_assoc());
 
 		$query = 'SELECT * FROM bugs WHERE id = ' . $this->bugID . ';';
 		$result = DbController::query($query);
@@ -51,9 +51,9 @@ class Message
 		return $this->sender;
 	}
 
-	public function getReciever()
+	public function getReceiver()
 	{
-		return $this->reciever;
+		return $this->receiver;
 	}
 
 	public function getBug()

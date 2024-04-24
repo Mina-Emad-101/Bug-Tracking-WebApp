@@ -140,7 +140,7 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 							<h3 class="fw-semibold">Send Message:</h3>
 							<form action="./form-handling/send-message.php" method="POST">
 								<input type="hidden" name="senderID" value="<?php echo $_SESSION['loggedInUser']->getID(); ?>">
-								<input type="hidden" name="recieverID" value="<?php echo $bug->getReporter()->getID(); ?>">
+								<input type="hidden" name="receiverID" value="<?php echo $bug->getReporter()->getID(); ?>">
 								<input type="hidden" name="bugID" value="<?php echo $bug->getID(); ?>">
 								<div class="mb-3">
 									<label for="message" class="form-label">Message</label>

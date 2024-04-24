@@ -26,14 +26,14 @@ CREATE TABLE `messages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` varchar(200) NOT NULL,
   `sender_id` int NOT NULL,
-  `reciever_id` int NOT NULL,
+  `receiver_id` int NOT NULL,
   `bug_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `1_idx` (`sender_id`),
-  KEY `2_idx` (`reciever_id`),
+  KEY `2_idx` (`receiver_id`),
   KEY `message3_idx` (`bug_id`),
   CONSTRAINT `message1` FOREIGN KEY (`sender_id`) REFERENCES `auth` (`id`),
-  CONSTRAINT `message2` FOREIGN KEY (`reciever_id`) REFERENCES `auth` (`id`),
+  CONSTRAINT `message2` FOREIGN KEY (`receiver_id`) REFERENCES `auth` (`id`),
   CONSTRAINT `message3` FOREIGN KEY (`bug_id`) REFERENCES `bugs` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

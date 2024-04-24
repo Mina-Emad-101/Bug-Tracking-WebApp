@@ -12,7 +12,7 @@ $conn = DbController::openConnection();
 
 $message = mysqli_real_escape_string($conn, $_POST['message']);
 $senderID = $_POST['senderID'];
-$recieverID = $_POST['recieverID'];
+$receiverID = $_POST['receiverID'];
 $bugID = $_POST['bugID'];
 $fixed = $_POST['fixed'];
 $statusID = 3;
@@ -29,7 +29,7 @@ if(count($_SESSION['message_errors']) == 0){
 		$query = "UPDATE bugs SET status_id = $statusID WHERE id = $bugID;";
 		DbController::query($query);
 	}
-	MessagesController::addMessage($message, $senderID, $recieverID, $bugID);
+	MessagesController::addMessage($message, $senderID, $receiverID, $bugID);
 	$_SESSION['message_success'] = true;
 }
 ?>

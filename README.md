@@ -2,10 +2,15 @@
 
 ## This Bug Tracking Web Application manages Bugs for different Projects.
 
-## This App was made using a Bootstrap Template for the Front-End part
-## And PHP, Mysql for the Back-End part
+<br>
+<br>
 
+### This App was made using a Bootstrap Template for the Front-End part
+### And PHP, Mysql for the Back-End part
 
+<br>
+<br>
+<br>
 
 ## App Explanation:
 

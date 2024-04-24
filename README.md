@@ -50,6 +50,9 @@
 	<li>Send Solution Message to Customer regarding their Bug</li>
 </ul>
 
+<br>
+<br>
+
 ### Database Tables:
 <ul>
 	<li>Auth</li>
@@ -62,6 +65,13 @@
 	<li>Messages</li>
 </ul>
 
+#### Roles
+This table contains The Main Roles for Users
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Role</li>
+</ul>
+
 #### Auth
 This table contains Authentication data for Users
 <ul>
@@ -72,11 +82,11 @@ This table contains Authentication data for Users
 	<li>Role ID (Foreign Key -> Roles.ID)</li>
 </ul>
 
-#### Roles
-This table contains The Main Roles for Users
+#### Categories
+This table contains The Projects' different Categories
 <ul>
 	<li>ID (Primary Key)</li>
-	<li>Role</li>
+	<li>Name</li>
 </ul>
 
 #### Projects
@@ -85,27 +95,6 @@ This table contains Projects' data
 	<li>ID (Primary Key)</li>
 	<li>Name</li>
 	<li>Category ID (Foreign Key -> Categories.ID)</li>
-</ul>
-
-#### Categories
-This table contains The Projects' different Categories
-<ul>
-	<li>ID (Primary Key)</li>
-	<li>Name</li>
-</ul>
-
-
-#### Bugs
-This table contains Bugs' data
-<ul>
-	<li>ID (Primary Key)</li>
-	<li>Priority ID (Foreign Key -> Priorities.ID)</li>
-	<li>Status ID (Foreign Key -> Statuses.ID)</li>
-	<li>Date Created</li>
-	<li>Description</li>
-	<li>Project ID (Foreign Key -> Projects.ID)</li>
-	<li>Assigned Staff ID (Foreign Key -> Auth.ID)</li>
-	<li>Reporter ID (Foreign Key -> Auth.ID)</li>
 </ul>
 
 #### Priorities
@@ -120,6 +109,19 @@ This table contains Bugs' Statuses
 <ul>
 	<li>ID (Primary Key)</li>
 	<li>Status</li>
+</ul>
+
+#### Bugs
+This table contains Bugs' data
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Priority ID (Foreign Key -> Priorities.ID)</li>
+	<li>Status ID (Foreign Key -> Statuses.ID)</li>
+	<li>Date Created</li>
+	<li>Description</li>
+	<li>Project ID (Foreign Key -> Projects.ID)</li>
+	<li>Assigned Staff ID (Foreign Key -> Auth.ID)</li>
+	<li>Reporter ID (Foreign Key -> Auth.ID)</li>
 </ul>
 
 #### Messages

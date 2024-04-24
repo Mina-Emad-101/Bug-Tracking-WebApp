@@ -4,9 +4,9 @@ require_once __DIR__.'/../Models/message.php';
 
 class MessagesController
 {
-	public static function addMessage($message, $senderID, $recieverID)
+	public static function addMessage($message, $senderID, $recieverID, $bugID)
 	{
-		$query = "INSERT INTO messages (message, sender_id, reciever_id) VALUES ('$message', '$senderID', '$recieverID');";
+		$query = "INSERT INTO messages (message, sender_id, reciever_id, bug_id) VALUES ('$message', '$senderID', '$recieverID', '$bugID');";
 		DbController::query($query);
 	}
 
@@ -16,11 +16,13 @@ class MessagesController
 		DbController::query($query);
 	}
 
-	public static function getMessagesArray($senderID, $recieverID)
+	public static function getMessagesArray($recieverID, $bugID = '')
 	{
 		$messages = array();
 
-		$query = "SELECT * FROM messages WHERE sender_id = '$senderID' AND reciever_id = $recieverID;";
+		$bug = ($bugID)? " AND bug_id = $bugID":"";
+
+		$query = "SELECT * FROM messages WHERE reciever_id = $recieverID"."$bug;";
 		$result = DbController::query($query);
 		while($row = $result->fetch_assoc())
 		{

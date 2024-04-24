@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../../Controllers/adminPermissions.php';
+require_once __DIR__.'/../../../Controllers/staffPermissions.php';
 require_once __DIR__ . '/../../../Controllers/authController.php';
 require_once __DIR__ . '/../../../Models/user.php';
 
@@ -9,10 +9,7 @@ if (isset($_POST['IDToRemove'])) {
 	AuthController::deleteAccount($_POST['IDToRemove']);
 }
 
-$users = array();
-
-$users = array_merge($users, AuthController::getUsersArray(AuthController::getRoleID('Admin')));
-$users = array_merge($users, AuthController::getUsersArray(AuthController::getRoleID('Staff')));
+$users = AuthController::getUsersArray(AuthController::getRoleID('Staff'));
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,10 +34,6 @@ $users = array_merge($users, AuthController::getUsersArray(AuthController::getRo
 			<?php require './basics/header.php'; ?>
 			<!--  Header End -->
 			<div class="container-fluid">
-				<div class="w-25 justify-content-center d-flex">
-					<a href="./add-account.php" class="btn btn-primary w-75 m-1 fs-6 fw-semibold justify-content-center align-items-center">Add Staff Member</a>
-				</div>
-				<br>
 				<div class="row">
 					<?php
 					for ($i = 0; $i < count($users); $i++) {
@@ -52,19 +45,7 @@ $users = array_merge($users, AuthController::getUsersArray(AuthController::getRo
 									<h4 class="fs-8 fw-semibold w-100 text-center">' . $users[$i]->getUsername() . '</h4>
 									<h4 class="fs-8 fw-semibold w-100 text-center">ID: ' . $users[$i]->getID() . '</h4>
 									<br>
-									<h4 class="fs-6 fw-semibold w-100 text-center">' . $users[$i]->getRole() . '</h4>
-									<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="staff-page.php" method="POST" class="w-100">
-											<input type="hidden" name="staffID" value="' . $users[$i]->getID() . '">
-											<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
-										</form>
-									</div>
-									<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="" method="POST" class="w-100">
-											<input type="hidden" name="IDToRemove" value="' . $users[$i]->getID() . '">
-											<button type="submit" class="btn btn-outline-danger w-100 m-1 fs-5">Delete Account</button>
-										</form>
-									</div>
+									<h4 class="fs-8 fw-semibold w-100 text-center">' . $users[$i]->getRole() . '</h4>
 								</div>
 							</div>
 						</div>

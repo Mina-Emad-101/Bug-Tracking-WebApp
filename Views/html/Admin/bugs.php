@@ -4,8 +4,9 @@ require_once __DIR__ . '/../../../Controllers/projectsController.php';
 require_once __DIR__ . '/../../../Controllers/authController.php';
 require_once __DIR__ . '/../../../Controllers/bugsController.php';
 require_once __DIR__ . '/../../../Models/bug.php';
+require_once __DIR__ . '/../../../Models/user.php';
 
-$bugs = BugsController::getBugsArray('priority_id');
+$bugs = BugsController::getBugsArray(orderBy: 'priority_id');
 ?>
 
 <!doctype html>
@@ -41,20 +42,20 @@ $bugs = BugsController::getBugsArray('priority_id');
 									<br>
 									<h1 class="fw-semibold w-100 text-center">Bug #' . $bugs[$i]->getID() . '</h1>
 							';
-						if(is_null($bugs[$i]->getAssignedStaffID()))
+						if($bugs[$i]->isAssigned())
 						{
-							echo '	<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Unassigned</h3>';
+							echo '	<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Priority: ' . $bugs[$i]->getPriority() . '</h3>';
 						}
 						else
 						{
-							echo '	<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Priority: ' . $bugs[$i]->getPriority() . '</h3>';
+							echo '	<h3 class="fw-semibold w-100 text-center" style="color: ' . $bugs[$i]->getPriorityColor() . ';">Unassigned</h3>';
 						}
 						echo '
 									<br>
 									<h4 class="fw-semibold w-100 text-center">Status: ' . $bugs[$i]->getStatus() . '</h4>
 									<h4 class="fw-semibold w-100 text-center">Project: ' . ProjectsController::getProjectFromID($bugs[$i]->getProjectID()) . '</h4>
 										<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="bug-page.php" method="POST" class="w-100">
+										<form action="bug-page.php" method="GET" class="w-100">
 											<input type="hidden" name="bugID" value="' . $bugs[$i]->getID() . '">
 											<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
 										</form>

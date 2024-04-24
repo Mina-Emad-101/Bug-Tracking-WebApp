@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../../Controllers/customerPermissions.php';
+require_once __DIR__.'/../../../Controllers/staffPermissions.php';
 ?>
 <!doctype html>
 <html lang="en">

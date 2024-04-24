@@ -1,12 +1,34 @@
 <?php
-require_once __DIR__.'/../../../Controllers/customerPermissions.php';
+require_once __DIR__.'/../../../Controllers/staffPermissions.php';
 require_once __DIR__.'/../../../Controllers/bugsController.php';
 require_once __DIR__.'/../../../Controllers/projectsController.php';
-require_once __DIR__.'/../../../Controllers/messagesController.php';
 require_once __DIR__.'/../../../Controllers/dbController.php';
 require_once __DIR__.'/../../../Models/bug.php';
 require_once __DIR__.'/../../../Models/user.php';
 require_once __DIR__.'/../../../Models/message.php';
+
+if(isset($_SESSION['assign_errors'])){
+	$errors = $_SESSION['assign_errors'];
+	unset($_SESSION['assign_errors']);
+}
+
+if(isset($_SESSION['message_errors'])){
+	$errors = $_SESSION['message_errors'];
+	unset($_SESSION['message_errors']);
+}
+
+$success = "";
+if(isset($_SESSION['assign_success']))
+{
+	$success = "Bug Assigned Successfully";
+	unset($_SESSION['assign_success']);
+}
+
+if(isset($_SESSION['message_success']))
+{
+	$success = "Message Sent Successfully";
+	unset($_SESSION['message_success']);
+}
 
 if(isset($_GET['bugID']))
 	$bug = BugsController::getBug($_GET['bugID']);
@@ -15,6 +37,9 @@ else
 	echo 'Bug has to be in URL!';
 	exit();
 }
+
+$query = 'SELECT * FROM priorities ORDER BY id ASC;';
+$result = DbController::query($query);
 
 $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $bug->getID())
 ?>
@@ -44,6 +69,21 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 				<div class="container-fluid">
 					<div class="card">
 						<div class="card-body">
+							<?php 
+							if(isset($errors)){
+							foreach($errors as $error){
+								echo '<div class="alert alert-danger" role="alert">';
+								echo $error;
+								echo '</div>';
+							}
+							}
+							if($success)
+							{
+								echo '<div class="alert alert-success" role="alert">';
+								echo $success;
+								echo '</div>';
+							}
+							?>
 							<h1 class="fw-bold display-3">Bug #<?php echo $bug->getID(); ?></h1>
 							<br>
 							<br>
@@ -54,29 +94,12 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 							<h3 class="fw-semibold">Status:</h3>
 							<h4><?php echo $bug->getStatus(); ?></h4>
 							<br>
-							<?php
-							if($bug->isAssigned())
-							{
-								echo '
-									<h3 class="fw-semibold">Assigned Staff Member:</h3>
-									<h4>ID: '. $bug->getAssignedStaff()->getID() . '</h4>
-									<h4>Username: '. $bug->getAssignedStaff()->getUsername() . '</h4>
-									<br>
-									<h3 class="fw-semibold">Priority:</h3>
-									<h4 style="color: ' . $bug->getPriorityColor() . ';">'. $bug->getPriority() . '</h4>
-								';
-							}
-							else
-							{
-								echo '
-									<h3 class="fw-semibold">Assigned Staff Member:</h3>
-									<h4>Bug Not Assigned To A Staff Member Yet...</h4>
-									<br>
-									<h3 class="fw-semibold">Priority:</h3>
-									<h4>Bug Not Assigned To A Staff Member Yet...</h4>
-								';
-							}
-							?>
+							<h3 class="fw-semibold">Assigned Staff Member:</h3>
+							<h4>ID: <?php echo $bug->getAssignedStaff()->getID(); ?></h4>
+							<h4>Username: <?php echo $bug->getAssignedStaff()->getUsername(); ?></h4>
+							<br>
+							<h3 class="fw-semibold">Priority:</h3>
+							<h4 style="color:<?php echo $bug->getPriorityColor(); ?>;"><?php echo $bug->getPriority(); ?></h4>
 							<br>
 							<h3 class="fw-semibold">Bug Creation Date:</h3>
 							<h4>Date: <?php echo explode(' ', $bug->getDateCreated())[0]; ?></h4>
@@ -92,6 +115,41 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 							<h3 class="fw-semibold">Bug Reporter:</h3>
 							<h4>ID: <?php echo $bug->getReporter()->getID(); ?></h4>
 							<h4>Username: <?php echo $bug->getReporter()->getUsername(); ?></h4>
+							<br>
+							<?php
+							if($bug->getStatus() == 'Investigating')
+							{
+							?>
+							<h3 class="fw-semibold">Send Message:</h3>
+							<form action="./form-handling/send-message.php" method="POST">
+								<input type="hidden" name="senderID" value="<?php echo $_SESSION['loggedInUser']->getID(); ?>">
+								<input type="hidden" name="recieverID" value="<?php echo $bug->getReporter()->getID(); ?>">
+								<input type="hidden" name="bugID" value="<?php echo $bug->getID(); ?>">
+								<div class="mb-3">
+									<label for="staffID" class="form-label">Message</label>
+									<br>
+									<textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message..."></textarea>
+								</div>
+								<div class="mb-3">
+									<label for="fixed" class="form-label">Bug Fixed: </label>
+									<input type="checkbox" id="fixed" name="fixed" value="<?php echo $bug->getID(); ?>">
+								</div>
+								<button type="submit" class="btn btn-primary fw-semibold fs-4">Send Message</button>
+							</form>
+							<br>
+							<h3 class="fw-semibold">Assign Bug:</h3>
+							<form action="./form-handling/assign-bug.php" method="POST">
+								<input type="hidden" name="bugID" value="<?php echo $bug->getID(); ?>">
+								<div class="mb-3">
+									<label for="staffID" class="form-label">Staff Member ID</label>
+									<br>
+									<input class="w-25" type="number" id="staffID" name="staffID">
+								</div>
+								<button type="submit" class="btn btn-primary fw-semibold fs-4">Assign Bug</button>
+							</form>
+							<?php
+							}
+							?>
 							<br>
 							<h3 class="fw-semibold">Messages:</h3>
 							<?php

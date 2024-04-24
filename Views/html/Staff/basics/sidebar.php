@@ -17,6 +17,14 @@
 					<span class="hide-menu">Home</span>
 				</li>
 				<li class="sidebar-item">
+					<a class="sidebar-link" href="./staff.php" aria-expanded="false">
+						<span>
+							<i class="ti ti-user"></i>
+						</span>
+						<span class="hide-menu">Staff</span>
+					</a>
+				</li>
+				<li class="sidebar-item">
 					<a class="sidebar-link" href="./bugs.php" aria-expanded="false">
 						<span>
 							<i class="ti ti-bug"></i>

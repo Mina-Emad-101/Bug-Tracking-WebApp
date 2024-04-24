@@ -14,6 +14,8 @@ class Bug
 	private $projectID;
 	private $assignedStaffID;
 	private $reporterID;
+	private $assignedStaff;
+	private $reporter;
 
 	public function __construct($dbRow)
 	{
@@ -25,6 +27,17 @@ class Bug
 		$this->projectID = $dbRow['project_id'];
 		$this->assignedStaffID = $dbRow['assigned_staff_id'];
 		$this->reporterID = $dbRow['reporter_id'];
+
+		if($this->isAssigned())
+		{
+			$query = 'SELECT * FROM auth WHERE id = ' . $this->assignedStaffID . ';';
+			$result = DbController::query($query);
+			$this->assignedStaff = new User($result->fetch_assoc());
+		}
+
+		$query = 'SELECT * FROM auth WHERE id = ' . $this->reporterID . ';';
+		$result = DbController::query($query);
+		$this->reporter = new User($result->fetch_assoc());
 	}
 
 	public function getID()
@@ -57,16 +70,6 @@ class Bug
 		return $this->projectID;
 	}
 
-	public function getAssignedStaffID()
-	{
-		return $this->assignedStaffID;
-	}
-
-	public function getReporterID()
-	{
-		return $this->reporterID;
-	}
-
 	public function getPriorityColor()
 	{
 		if($this->priorityID == 1)
@@ -94,17 +97,16 @@ class Bug
 
 	public function getAssignedStaff()
 	{
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->getAssignedStaffID() . ';';
-		$result = DbController::query($query);
-		$staff = new User($result->fetch_assoc());
-		return $staff;
+		return $this->assignedStaff;
 	}
 
 	public function getReporter()
 	{
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->getReporterID() . ';';
-		$result = DbController::query($query);
-		$reporter = new User($result->fetch_assoc());
-		return $reporter;
+		return $this->reporter;
+	}
+
+	public function isAssigned()
+	{
+		return !is_null($this->assignedStaffID);
 	}
 }

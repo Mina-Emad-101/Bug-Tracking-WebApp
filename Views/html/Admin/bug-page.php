@@ -5,10 +5,16 @@ require_once __DIR__.'/../../../Controllers/projectsController.php';
 require_once __DIR__.'/../../../Controllers/dbController.php';
 require_once __DIR__.'/../../../Models/bug.php';
 require_once __DIR__.'/../../../Models/user.php';
+require_once __DIR__.'/../../../Models/message.php';
 
 if(isset($_SESSION['assign_errors'])){
-	$assign_errors = $_SESSION['assign_errors'];
+	$errors = $_SESSION['assign_errors'];
 	unset($_SESSION['assign_errors']);
+}
+
+if(isset($_SESSION['message_errors'])){
+	$errors = $_SESSION['message_errors'];
+	unset($_SESSION['message_errors']);
 }
 
 $success = "";
@@ -18,16 +24,24 @@ if(isset($_SESSION['assign_success']))
 	unset($_SESSION['assign_success']);
 }
 
-if(isset($_POST['bugID']))
-	$bug = BugsController::getBug($_POST['bugID']);
+if(isset($_SESSION['message_success']))
+{
+	$success = "Message Sent Successfully";
+	unset($_SESSION['message_success']);
+}
+
+if(isset($_GET['bugID']))
+	$bug = BugsController::getBug($_GET['bugID']);
 else
 {
-	$bug = BugsController::getBug($_SESSION['bugID']);
-	unset($_SESSION['bugID']);
+	echo 'Bug has to be in URL!';
+	exit();
 }
 
 $query = 'SELECT * FROM priorities ORDER BY id ASC;';
 $result = DbController::query($query);
+
+$messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $bug->getID())
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,8 +70,8 @@ $result = DbController::query($query);
 					<div class="card">
 						<div class="card-body">
 							<?php 
-							if(isset($assign_errors)){
-							foreach($assign_errors as $error){
+							if(isset($errors)){
+							foreach($errors as $error){
 								echo '<div class="alert alert-danger" role="alert">';
 								echo $error;
 								echo '</div>';
@@ -81,11 +95,11 @@ $result = DbController::query($query);
 							<h4><?php echo $bug->getStatus(); ?></h4>
 							<br>
 							<?php
-							if($bug->getAssignedStaffID())
+							if($bug->isAssigned())
 							{
 								echo '
 									<h3 class="fw-semibold">Assigned Staff Member:</h3>
-									<h4>ID: '. $bug->getAssignedStaffID() . '</h4>
+									<h4>ID: '. $bug->getAssignedStaff()->getID() . '</h4>
 									<h4>Username: '. $bug->getAssignedStaff()->getUsername() . '</h4>
 									<br>
 									<h3 class="fw-semibold">Priority:</h3>
@@ -116,11 +130,31 @@ $result = DbController::query($query);
 							<br>
 							<br>
 							<h3 class="fw-semibold">Bug Reporter:</h3>
-							<h4>ID: <?php echo $bug->getReporterID(); ?></h4>
+							<h4>ID: <?php echo $bug->getReporter()->getID(); ?></h4>
 							<h4>Username: <?php echo $bug->getReporter()->getUsername(); ?></h4>
 							<br>
 							<?php
-							if(!$bug->getAssignedStaffID())
+							if($bug->getStatus() != 'Fixed')
+							{
+							?>
+							<h3 class="fw-semibold">Send Message:</h3>
+							<form action="./form-handling/send-message.php" method="POST">
+								<input type="hidden" name="senderID" value="<?php echo $_SESSION['loggedInUser']->getID(); ?>">
+								<input type="hidden" name="recieverID" value="<?php echo $bug->getReporter()->getID(); ?>">
+								<input type="hidden" name="bugID" value="<?php echo $bug->getID(); ?>">
+								<div class="mb-3">
+									<label for="message" class="form-label">Message</label>
+									<br>
+									<textarea id="message" name="message" rows="5" cols="30" placeholder="Enter Message..."></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary fw-semibold fs-4">Send Message</button>
+							</form>
+							<?php
+							}
+							?>
+							<br>
+							<?php
+							if(!$bug->isAssigned())
 							{
 								echo '
 									<h3 class="fw-semibold">Assign Bug:</h3>
@@ -147,6 +181,19 @@ $result = DbController::query($query);
 								';
 							}
 							?>
+							<br>
+							<h3 class="fw-semibold">Messages:</h3>
+							<?php
+							for($i = 0; $i < count($messages); $i++)
+							{
+							echo '
+							<h4>From: ' . $messages[$i]->getSender()->getUsername() . ' (' . $messages[$i]->getSender()->getRole() . ')</h4>
+							<h4>' . $messages[$i]->getMessage() . '</h4>
+							<br>
+							';
+							}
+							?>
+							<br>
 						</div>
 					</div>
 				</div>

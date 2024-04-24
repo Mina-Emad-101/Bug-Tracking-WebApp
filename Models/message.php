@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../Controllers/dbController.php';
 require_once __DIR__ . '/../Controllers/messagesController.php';
 require_once __DIR__ . '/../Models/user.php';
+require_once __DIR__ . '/../Models/bug.php';
 
 class Message
 {
@@ -9,8 +10,10 @@ class Message
 	private $message;
 	private $senderID;
 	private $recieverID;
+	private $bugID;
 	private $sender;
 	private $reciever;
+	private $bug;
 
 	public function __construct($dbRow)
 	{
@@ -18,6 +21,7 @@ class Message
 		$this->message = $dbRow['message'];
 		$this->senderID = $dbRow['sender_id'];
 		$this->recieverID = $dbRow['reciever_id'];
+		$this->bugID = $dbRow['bug_id'];
 
 		$query = 'SELECT * FROM auth WHERE id = ' . $this->senderID . ';';
 		$result = DbController::query($query);
@@ -26,6 +30,10 @@ class Message
 		$query = 'SELECT * FROM auth WHERE id = ' . $this->recieverID . ';';
 		$result = DbController::query($query);
 		$this->reciever = new User($result->fetch_assoc());
+
+		$query = 'SELECT * FROM bugs WHERE id = ' . $this->bugID . ';';
+		$result = DbController::query($query);
+		$this->bug = new Bug($result->fetch_assoc());
 	}
 
 	public function getID()
@@ -46,5 +54,10 @@ class Message
 	public function getReciever()
 	{
 		return $this->reciever;
+	}
+
+	public function getBug()
+	{
+		return $this->bug;
 	}
 }

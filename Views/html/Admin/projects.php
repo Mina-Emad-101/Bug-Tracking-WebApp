@@ -50,8 +50,8 @@ $projects = ProjectsController::getProjectsArray();
 									<br>
 									<h4 class="fs-6 fw-semibold w-100 text-center">' . CategoriesController::getCategoryFromID($projects[$i]->getCategoryID()) . '</h4>
 									<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="" method="POST" class="w-100">
-											<input type="hidden" name="projectName" value="' . $projects[$i]->getName() . '">
+										<form action="project-page.php" method="GET" class="w-100">
+											<input type="hidden" name="projectID" value="' . $projects[$i]->getID() . '">
 											<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
 										</form>
 									</div>

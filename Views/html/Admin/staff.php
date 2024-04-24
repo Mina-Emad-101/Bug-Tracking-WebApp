@@ -53,12 +53,18 @@ $users = array_merge($users, AuthController::getUsersArray(AuthController::getRo
 									<h4 class="fs-8 fw-semibold w-100 text-center">ID: ' . $users[$i]->getID() . '</h4>
 									<br>
 									<h4 class="fs-6 fw-semibold w-100 text-center">' . $users[$i]->getRole() . '</h4>
+						';
+						if($users[$i]->getRole() == 'Staff')
+							echo '
 									<div class="d-flex align-items-center justify-content-center w-100">
-										<form action="staff-page.php" method="POST" class="w-100">
+										<form action="staff-page.php" method="GET" class="w-100">
 											<input type="hidden" name="staffID" value="' . $users[$i]->getID() . '">
 											<button type="submit" class="btn btn-dark w-100 m-1 fs-5">See Details</button>
 										</form>
 									</div>
+
+							';
+						echo '
 									<div class="d-flex align-items-center justify-content-center w-100">
 										<form action="" method="POST" class="w-100">
 											<input type="hidden" name="IDToRemove" value="' . $users[$i]->getID() . '">

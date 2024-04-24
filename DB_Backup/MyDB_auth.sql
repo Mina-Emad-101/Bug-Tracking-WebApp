@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `auth`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `role_id` int NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `auth` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `role_idx` (`role_id`),
   CONSTRAINT `role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `auth` (
 
 LOCK TABLES `auth` WRITE;
 /*!40000 ALTER TABLE `auth` DISABLE KEYS */;
-INSERT INTO `auth` VALUES (1,'Mina','mina@gmail.com','mina1234',1);
+INSERT INTO `auth` VALUES (1,'Mina','mina@gmail.com','mina1234',1),(2,'Yosab','yosab@gmail.com','yosab1234',2),(3,'Youssef','youssef@gmail.com','youssef1234',3),(4,'Emad','emad@gmail.com','emad1234',2),(5,'Michael','michael@gmail.com','michael1234',1);
 /*!40000 ALTER TABLE `auth` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-23  6:25:52
+-- Dump completed on 2024-04-24 21:41:50

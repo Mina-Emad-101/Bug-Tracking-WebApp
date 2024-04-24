@@ -16,29 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roles`
+-- Table structure for table `messages`
 --
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roles` (
+CREATE TABLE `messages` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `role` varchar(45) NOT NULL,
+  `message` varchar(200) NOT NULL,
+  `sender_id` int NOT NULL,
+  `reciever_id` int NOT NULL,
+  `bug_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `role_UNIQUE` (`role`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `1_idx` (`sender_id`),
+  KEY `2_idx` (`reciever_id`),
+  KEY `message3_idx` (`bug_id`),
+  CONSTRAINT `message1` FOREIGN KEY (`sender_id`) REFERENCES `auth` (`id`),
+  CONSTRAINT `message2` FOREIGN KEY (`reciever_id`) REFERENCES `auth` (`id`),
+  CONSTRAINT `message3` FOREIGN KEY (`bug_id`) REFERENCES `bugs` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `messages`
 --
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Admin'),(3,'Customer'),(2,'Staff');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages` VALUES (1,'Bug has been assigned to one of our Staff Members.\r\nThe bug is now under investigation.\r\nThank you for reporting the bug!',1,3,1),(2,'Working on it.\r\nThanks for your patience.',2,3,1),(3,'I am now responsible for the bug, pleasure working with you.\r\nAllow me just 2 Hours!',4,3,1),(4,'The bug is now Fixed, Thanks for your patience!',4,3,1),(5,'We will be working on it as soon as possible.',1,3,5);
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-24 21:41:48
+-- Dump completed on 2024-04-24 21:41:52

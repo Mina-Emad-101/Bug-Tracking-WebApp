@@ -43,7 +43,7 @@ CREATE TABLE `bugs` (
   CONSTRAINT `3` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   CONSTRAINT `4` FOREIGN KEY (`assigned_staff_id`) REFERENCES `auth` (`id`),
   CONSTRAINT `5` FOREIGN KEY (`reporter_id`) REFERENCES `auth` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,6 +52,7 @@ CREATE TABLE `bugs` (
 
 LOCK TABLES `bugs` WRITE;
 /*!40000 ALTER TABLE `bugs` DISABLE KEYS */;
+INSERT INTO `bugs` VALUES (1,1,3,'2024-04-23 07:49:45','Can\'t add to cart\r\n',2,4,3),(2,3,2,'2024-04-23 22:51:15','course not working',3,4,3),(3,2,2,'2024-04-24 00:48:25','Buffering alot',4,2,3),(4,NULL,1,'2024-04-24 03:52:33','Button not working',1,NULL,3),(5,2,2,'2024-04-24 19:05:30','play button not working\r\n',4,4,3);
 /*!40000 ALTER TABLE `bugs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-23  6:25:56
+-- Dump completed on 2024-04-24 21:41:39

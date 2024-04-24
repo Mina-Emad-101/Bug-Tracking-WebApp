@@ -6,8 +6,8 @@
 
 <br>
 
-### This App was made using a Bootstrap Template for the Front-End part
-### And PHP, Mysql for the Back-End part
+#### This App was made using a Bootstrap Template for the Front-End part
+#### And PHP, Mysql for the Back-End part
 
 <br>
 <br>
@@ -23,16 +23,14 @@
 
 <br>
 
-### Customer
-
+#### Customer
 <ul>
 	<li>Log into the App</li>
 	<li>Send Bug Details raised from their Software to Administrator (Including Screenshot)</li>
 	<li>Monitor Bug's Case-Flow Details</li>
 </ul>
 
-### Administrator
-
+#### Administrator
 <ul>
 	<li>Log into the App</li>
 	<li>Add Staff Members to App</li>
@@ -43,12 +41,93 @@
 	<li>Send Messages to Customers regarding their Bug</li>
 </ul>
 
-### Staff Member
-
+#### Staff Member
 <ul>
 	<li>Log into the App</li>
 	<li>View Bugs Assigned to Them</li>
 	<li>Monitor Bug's Case-Flow Details</li>
 	<li>Assign Bug to other Staff Member if the Bug is related to them</li>
 	<li>Send Solution Message to Customer regarding their Bug</li>
+</ul>
+
+### Database Tables:
+<ul>
+	<li>Auth</li>
+	<li>Roles</li>
+	<li>Projects</li>
+	<li>Categories</li>
+	<li>Bugs</li>
+	<li>Priorities</li>
+	<li>Statuses</li>
+	<li>Messages</li>
+</ul>
+
+#### Auth
+This table contains Authentication data for Users
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Username</li>
+	<li>Email</li>
+	<li>Password</li>
+	<li>Role ID (Foreign Key -> Roles.ID)</li>
+</ul>
+
+#### Roles
+This table contains The Main Roles for Users
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Role</li>
+</ul>
+
+#### Projects
+This table contains Projects' data
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Name</li>
+	<li>Category ID (Foreign Key -> Categories.ID)</li>
+</ul>
+
+#### Categories
+This table contains The Projects' different Categories
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Name</li>
+</ul>
+
+
+#### Bugs
+This table contains Bugs' data
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Priority ID (Foreign Key -> Priorities.ID)</li>
+	<li>Status ID (Foreign Key -> Statuses.ID)</li>
+	<li>Date Created</li>
+	<li>Description</li>
+	<li>Project ID (Foreign Key -> Projects.ID)</li>
+	<li>Assigned Staff ID (Foreign Key -> Auth.ID)</li>
+	<li>Reporter ID (Foreign Key -> Auth.ID)</li>
+</ul>
+
+#### Priorities
+This table contains Bugs' Priorities
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Priority</li>
+</ul>
+
+#### Statuses
+This table contains Bugs' Statuses
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Status</li>
+</ul>
+
+#### Messages
+This table contains Messages sent to Customers
+<ul>
+	<li>ID (Primary Key)</li>
+	<li>Message</li>
+	<li>Sender ID (Foreign Key -> Auth.ID)</li>
+	<li>Receiver ID (Foreign Key -> Auth.ID)</li>
+	<li>Bug ID (Foreign Key -> Bugs.ID)</li>
 </ul>

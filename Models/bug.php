@@ -30,12 +30,12 @@ class Bug
 
 		if($this->isAssigned())
 		{
-			$query = 'SELECT * FROM auth WHERE id = ' . $this->assignedStaffID . ';';
+			$query = 'SELECT * FROM users WHERE id = ' . $this->assignedStaffID . ';';
 			$result = DbController::query($query);
 			$this->assignedStaff = new User($result->fetch_assoc());
 		}
 
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->reporterID . ';';
+		$query = 'SELECT * FROM users WHERE id = ' . $this->reporterID . ';';
 		$result = DbController::query($query);
 		$this->reporter = new User($result->fetch_assoc());
 	}

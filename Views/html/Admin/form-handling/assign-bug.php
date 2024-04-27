@@ -12,7 +12,7 @@ $staffID = $_POST['staffID'];
 $priorityID = $_POST['priorityID'];
 $statusID = 2;
 
-$query = "SELECT * FROM auth WHERE id = $staffID;";
+$query = "SELECT * FROM users WHERE id = $staffID;";
 $result = DbController::query($query);
 $userRow = $result->fetch_assoc();
 

@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `auth`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `auth`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `auth` (
+CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
@@ -36,13 +36,13 @@ CREATE TABLE `auth` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `auth` WRITE;
-/*!40000 ALTER TABLE `auth` DISABLE KEYS */;
-INSERT INTO `auth` VALUES (1,'Mina','mina@gmail.com','mina1234',1),(2,'Yosab','yosab@gmail.com','yosab1234',2),(3,'Youssef','youssef@gmail.com','youssef1234',3),(4,'Emad','emad@gmail.com','emad1234',2),(5,'Michael','michael@gmail.com','michael1234',1);
-/*!40000 ALTER TABLE `auth` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Mina','mina@gmail.com','mina1234',1),(2,'Yosab','yosab@gmail.com','yosab1234',2),(3,'Youssef','youssef@gmail.com','youssef1234',3),(4,'Emad','emad@gmail.com','emad1234',2),(5,'Michael','michael@gmail.com','michael1234',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

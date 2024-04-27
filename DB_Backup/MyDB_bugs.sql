@@ -41,8 +41,8 @@ CREATE TABLE `bugs` (
   CONSTRAINT `1` FOREIGN KEY (`priority_id`) REFERENCES `priorities` (`id`),
   CONSTRAINT `2` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`id`),
   CONSTRAINT `3` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
-  CONSTRAINT `4` FOREIGN KEY (`assigned_staff_id`) REFERENCES `auth` (`id`),
-  CONSTRAINT `5` FOREIGN KEY (`reporter_id`) REFERENCES `auth` (`id`)
+  CONSTRAINT `4` FOREIGN KEY (`assigned_staff_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `5` FOREIGN KEY (`reporter_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

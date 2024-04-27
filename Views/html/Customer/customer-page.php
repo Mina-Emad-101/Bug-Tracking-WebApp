@@ -14,7 +14,7 @@ else
 	exit();
 }
 
-$query = "SELECT * FROM auth WHERE id = $customerID;";
+$query = "SELECT * FROM users WHERE id = $customerID;";
 $result = DbController::query($query);
 $customer = new User($result->fetch_assoc());
 

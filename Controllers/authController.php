@@ -7,7 +7,7 @@ class AuthController
 {
 	public static function getUsernameFromID($id)
 	{
-		$query = "SELECT * FROM auth WHERE id = '$id';";
+		$query = "SELECT * FROM users WHERE id = '$id';";
 		$result = DbController::query($query);
 		$row = $result->fetch_assoc();
 		return $row['username'];
@@ -31,7 +31,7 @@ class AuthController
 
 	public static function confirmLogin($email, $password)
 	{
-		$query = "SELECT * FROM auth WHERE email = '$email' AND password = '$password';";
+		$query = "SELECT * FROM users WHERE email = '$email' AND password = '$password';";
 		$result = DbController::query($query);
 
 		if (mysqli_num_rows($result) == 0) return false;
@@ -45,7 +45,7 @@ class AuthController
 
 	public static function isUsernameTaken($username)
 	{
-		$query = "SELECT * FROM auth WHERE username = '$username';";
+		$query = "SELECT * FROM users WHERE username = '$username';";
 		$result = DbController::query($query);
 
 		if (mysqli_num_rows($result) == 0) {
@@ -57,7 +57,7 @@ class AuthController
 
 	public static function isEmailTaken($email)
 	{
-		$query = "SELECT * FROM auth WHERE email = '$email';";
+		$query = "SELECT * FROM users WHERE email = '$email';";
 		$result = DbController::query($query);
 
 		if (mysqli_num_rows($result) == 0) {
@@ -71,13 +71,13 @@ class AuthController
 	{
 		$roleID = self::getRoleID($role);
 
-		$query = "INSERT INTO auth (username, email, password, role_id) VALUES ('$username', '$email', '$password', '$roleID');";
+		$query = "INSERT INTO users (username, email, password, role_id) VALUES ('$username', '$email', '$password', '$roleID');";
 		DbController::query($query);
 	}
 
 	public static function deleteAccount($id)
 	{
-		$query = "DELETE FROM auth WHERE id = '$id';";
+		$query = "DELETE FROM users WHERE id = '$id';";
 		DbController::query($query);
 	}
 
@@ -86,10 +86,10 @@ class AuthController
 		$users = array();
 
 		if ($roleID > 0) {
-			$query = "SELECT * FROM auth WHERE role_id = $roleID;";
+			$query = "SELECT * FROM users WHERE role_id = $roleID;";
 			$result = DbController::query($query);
 		} else {
-			$query = 'SELECT * FROM auth;';
+			$query = 'SELECT * FROM users;';
 			$result = DbController::query($query);
 		}
 

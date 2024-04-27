@@ -23,11 +23,11 @@ class Message
 		$this->receiverID = $dbRow['receiver_id'];
 		$this->bugID = $dbRow['bug_id'];
 
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->senderID . ';';
+		$query = 'SELECT * FROM users WHERE id = ' . $this->senderID . ';';
 		$result = DbController::query($query);
 		$this->sender = new User($result->fetch_assoc());
 
-		$query = 'SELECT * FROM auth WHERE id = ' . $this->receiverID . ';';
+		$query = 'SELECT * FROM users WHERE id = ' . $this->receiverID . ';';
 		$result = DbController::query($query);
 		$this->receiver = new User($result->fetch_assoc());
 

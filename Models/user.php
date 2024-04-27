@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../Controllers/authController.php';
+require_once __DIR__ . '/../Controllers/usersController.php';
 
 class User
 {

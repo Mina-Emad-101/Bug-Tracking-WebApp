@@ -32,8 +32,8 @@ CREATE TABLE `messages` (
   KEY `1_idx` (`sender_id`),
   KEY `2_idx` (`receiver_id`),
   KEY `message3_idx` (`bug_id`),
-  CONSTRAINT `message1` FOREIGN KEY (`sender_id`) REFERENCES `auth` (`id`),
-  CONSTRAINT `message2` FOREIGN KEY (`receiver_id`) REFERENCES `auth` (`id`),
+  CONSTRAINT `message1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `message2` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`),
   CONSTRAINT `message3` FOREIGN KEY (`bug_id`) REFERENCES `bugs` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

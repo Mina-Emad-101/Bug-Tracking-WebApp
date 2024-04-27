@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/../../../Controllers/dbController.php';
-require_once __DIR__.'/../../../Controllers/authController.php';
+require_once __DIR__.'/../../../Controllers/usersController.php';
 
 session_start();
 

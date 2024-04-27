@@ -10,7 +10,7 @@ $_SESSION['assign_errors'] = array();
 $bugID = $_POST['bugID'];
 $staffID = $_POST['staffID'];
 
-$query = "SELECT * FROM auth WHERE id = $staffID;";
+$query = "SELECT * FROM users WHERE id = $staffID;";
 $result = DbController::query($query);
 $userRow = $result->fetch_assoc();
 

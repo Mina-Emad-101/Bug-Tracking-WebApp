@@ -6,13 +6,13 @@ require_once __DIR__ . '/../../../Models/user.php';
 session_start();
 
 if (isset($_POST['IDToRemove'])) {
-	AuthController::deleteAccount($_POST['IDToRemove']);
+	UsersController::deleteAccount($_POST['IDToRemove']);
 }
 
 $users = array();
 
-$users = array_merge($users, AuthController::getUsersArray(AuthController::getRoleID('Admin')));
-$users = array_merge($users, AuthController::getUsersArray(AuthController::getRoleID('Staff')));
+$users = array_merge($users, UsersController::getUsersArray(UsersController::getRoleID('Admin')));
+$users = array_merge($users, UsersController::getUsersArray(UsersController::getRoleID('Staff')));
 ?>
 <!doctype html>
 <html lang="en">

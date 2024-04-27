@@ -14,7 +14,7 @@ class User
 		$this->id = $dbRow['id'];
 		$this->username = $dbRow['username'];
 		$this->email = $dbRow['email'];
-		$this->role = AuthController::getRoleFromID($dbRow['role_id']);
+		$this->role = UsersController::getRoleFromID($dbRow['role_id']);
 	}
 
 	public function getID()

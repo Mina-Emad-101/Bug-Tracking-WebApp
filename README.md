@@ -50,7 +50,7 @@
 
 ### Database Tables:
 <ul>
-	<li>Auth</li>
+	<li>Users</li>
 	<li>Roles</li>
 	<li>Projects</li>
 	<li>Categories</li>
@@ -69,7 +69,7 @@ This table contains The Main Roles for Users
 	<li>Role</li>
 </ul>
 
-#### Auth
+#### Users
 This table contains Authentication data for Users
 <ul>
 	<li>ID (Primary Key)</li>
@@ -117,8 +117,8 @@ This table contains Bugs' data
 	<li>Date Created</li>
 	<li>Description</li>
 	<li>Project ID (Foreign Key -> Projects.ID)</li>
-	<li>Assigned Staff ID (Foreign Key -> Auth.ID)</li>
-	<li>Reporter ID (Foreign Key -> Auth.ID)</li>
+	<li>Assigned Staff ID (Foreign Key -> Users.ID)</li>
+	<li>Reporter ID (Foreign Key -> Users.ID)</li>
 </ul>
 
 #### Messages
@@ -126,7 +126,7 @@ This table contains Messages sent to Customers
 <ul>
 	<li>ID (Primary Key)</li>
 	<li>Message</li>
-	<li>Sender ID (Foreign Key -> Auth.ID)</li>
-	<li>Receiver ID (Foreign Key -> Auth.ID)</li>
+	<li>Sender ID (Foreign Key -> Users.ID)</li>
+	<li>Receiver ID (Foreign Key -> Users.ID)</li>
 	<li>Bug ID (Foreign Key -> Bugs.ID)</li>
 </ul>

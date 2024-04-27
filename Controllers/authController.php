@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../Controllers/dbController.php';
 require_once __DIR__ . '/../Models/user.php';
 
-class AuthController
+class UsersController
 {
 	public static function getUsernameFromID($id)
 	{

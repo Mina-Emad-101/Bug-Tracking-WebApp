@@ -25,8 +25,6 @@ if(!$password){ array_push($_SESSION['register_errors'], 'Password is Required')
 
 if(count($_SESSION['register_errors']) > 0) exit();
 
-if(UsersController::isUsernameTaken($username)){ array_push($_SESSION['register_errors'], 'Username Already Taken'); }
-
 if(UsersController::isEmailTaken($email)){ array_push($_SESSION['register_errors'], 'Email Already Taken'); }
 
 if(count($_SESSION['register_errors']) == 0){

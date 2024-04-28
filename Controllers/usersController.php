@@ -43,18 +43,6 @@ class UsersController
 		return true;
 	}
 
-	public static function isUsernameTaken($username)
-	{
-		$query = "SELECT * FROM users WHERE username = '$username';";
-		$result = DbController::query($query);
-
-		if (mysqli_num_rows($result) == 0) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	public static function isEmailTaken($email)
 	{
 		$query = "SELECT * FROM users WHERE email = '$email';";

@@ -19,8 +19,11 @@ $reporterID = $_SESSION['loggedInUser']->getID();
 
 $conn->close();
 
+$allowedExtensions = array('png', 'jpg', 'jpeg');
+$fileExtension = explode('.', basename($_FILES['screenshot']['name']))[1];
+
 if(!is_uploaded_file($_FILES['screenshot']['tmp_name'])){ array_push($_SESSION['bug_errors'], 'Screenshot is Required'); }
-if(explode('.', basename($_FILES['screenshot']['name']))[1] != 'png'){ array_push($_SESSION['bug_errors'], 'Screenshot Has to Be in PNG Format'); }
+if(!in_array($fileExtension, $allowedExtensions)){ array_push($_SESSION['bug_errors'], 'Screenshot Has to Be in PNG Format'); }
 if(!$projectID){ array_push($_SESSION['bug_errors'], 'Project is Required'); }
 if(!$description){ array_push($_SESSION['bug_errors'], 'Description is Required'); }
 
@@ -30,7 +33,6 @@ if(count($_SESSION['bug_errors']) == 0){
 	BugsController::addBug($statusID, $dateCreated, $description, $projectID, $reporterID);
 
 	$uploaddir = '../../../bugScreenshots/';
-	$fileExtension = explode('.', basename($_FILES['screenshot']['name']))[1];
 
 	$query = 'SELECT * FROM bugs ORDER BY id DESC;';
 	$result = DbController::query($query);

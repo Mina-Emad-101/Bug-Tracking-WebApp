@@ -126,7 +126,7 @@ $messages = MessagesController::getMessagesArray($bug->getReporter()->getID(), $
 							<h4><?php echo $bug->getDescription(); ?></h4>
 							<br>
 							<h3 class="fw-semibold">Screenshot:</h3>
-							<img class="border border-info" src="../../bugScreenshots/Bug-<?php echo $bug->getID(); ?>.png" width="800" height="500">
+							<img class="border border-info" src="./form-handling/get-image.php?name=Bug-<?php echo $bug->getID(); ?>" width="800" height="500">
 							<br>
 							<br>
 							<h3 class="fw-semibold">Bug Reporter:</h3>

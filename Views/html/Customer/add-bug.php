@@ -78,9 +78,9 @@ $projectsResult = DbController::query($query);
 									<textarea id="description" name="description" rows="4" cols="30" placeholder="Brief Description of Bug."></textarea>
 								</div>
 								<div class="mb-3">
-									<label for="screenshot" class="form-label">Bug Screenshot (PNG Only)</label>
+									<label for="screenshot" class="form-label">Bug Screenshot (PNG, JPG or JPEG Only)</label>
 									<br>
-									<input type="file" name="screenshot" id="screenshot" accept=".png">
+									<input type="file" name="screenshot" id="screenshot" accept=".png,.jpg,.jpeg">
 								</div>
 								<button type="submit" class="btn btn-primary fw-semibold fs-4">Add Bug</button>
 							</form>

@@ -33,6 +33,6 @@ if(count($_SESSION['register_errors']) == 0){
 	if(isset($_SESSION['loggedInUser'])) exit();
 
 	UsersController::confirmLogin($email, $password);
-	header("location:http://".$_SERVER['SERVER_NAME'].'/BugTrackingApplication/Views/html/main.php');
+	header("location:http://".$_SERVER['SERVER_NAME'].'/Bug-Tracking-WebApp/Views/html/main.php');
 }
 ?>

@@ -4,7 +4,7 @@ class DbController
 	private static $host = 'localhost';
 	private static $user = 'root';
 	private static $password = '';
-	private static $dbName = 'MyDB';
+	private static $dbName = 'mydb';
 
 	public static function openConnection()
 	{

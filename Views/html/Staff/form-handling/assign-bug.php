@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__.'/../../../../Controllers/dbController.php';
 
-session_start();
+if(!isset($_SESSION)){
+	session_start();
+}
 
 header('location:'.$_SERVER['HTTP_REFERER']);
 

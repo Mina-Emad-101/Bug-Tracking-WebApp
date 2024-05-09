@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+	session_start();
+}
 
 if(isset($_SESSION['loggedInUser'])){ header($_SESSION['main']); exit(); }
 if(isset($_SESSION['login_errors'])){

@@ -2,7 +2,9 @@
 require_once __DIR__.'/../../../Controllers/adminPermissions.php';
 require_once __DIR__.'/../../../Controllers/dbController.php';
 
-session_start();
+if(!isset($_SESSION)){
+	session_start();
+}
 
 if(isset($_SESSION['project_errors'])){
 	$project_errors = $_SESSION['project_errors'];

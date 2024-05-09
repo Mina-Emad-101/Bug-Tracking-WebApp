@@ -36,7 +36,9 @@ class UsersController
 
 		if (mysqli_num_rows($result) == 0) return false;
 
-		session_start();
+		if(!isset($_SESSION)){
+			session_start();
+		}
 		$row = $result->fetch_assoc();
 		$_SESSION['loggedInUser'] = new User($row);
 

@@ -3,7 +3,7 @@ class DbController
 {
 	private static $host = 'localhost';
 	private static $user = 'root';
-	private static $password = '';
+	private static $password = '1234';
 	private static $dbName = 'mydb';
 
 	public static function openConnection()
